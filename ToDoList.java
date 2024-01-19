@@ -276,7 +276,10 @@ class AppFrame extends JFrame {
         task.saveToDatabase();
     }
     private void clearCompletedTasksFromDatabase() {
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mytodolist", "root", "pass123")) {
+        String jdbcURL = "jdbc:mysql://localhost:3306/mydata";
+        String username = "root";
+        String password = "pass123";
+        try (Connection connection = DriverManager.getConnection(jdbcURL, username, password)) {
             String deleteSql = "DELETE FROM tasks WHERE is_completed = 1";
             try (PreparedStatement deleteStatement = connection.prepareStatement(deleteSql)) {
                 deleteStatement.executeUpdate();
