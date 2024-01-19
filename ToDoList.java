@@ -92,7 +92,10 @@ class Task extends JPanel {
         revalidate();
     }
     public void saveToDatabase() {
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mytodolist", "root", "pass123")) {
+        string jdbcurl="jdbc:mysql://localhost:3306/mytodolist";
+        string username="root";
+        string password="pass123";
+        try (Connection connection = DriverManager.getConnection(jdbcurl, username, password)) {
             String sql = "INSERT INTO tasks (task_name, is_completed) VALUES (?, ?)";
             try (PreparedStatement insertStatement = connection.prepareStatement(sql)) {
                 insertStatement.setString(1, taskName.getText());
